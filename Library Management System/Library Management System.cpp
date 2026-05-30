@@ -1,8 +1,20 @@
 #include <iostream>
+#include <string>
 using namespace std;
+
+class Book
+{
+public:
+    int bookID;
+    string title;
+    string author;
+};
 
 class LibrarySystem
 {
+private:
+    Book books[100];
+    int bookCount = 0;
 public:
     void printBanner()
     {
@@ -48,11 +60,11 @@ public:
             switch (choice)
             {
             case 1:
-                cout << "\n[Add Book Selected]\n";
+				addBook();
                 break;
 
             case 2:
-                cout << "\n[View Books Selected]\n";
+                viewBooks();
                 break;
 
             case 3:
@@ -87,6 +99,50 @@ public:
             }
 
         } while (choice != 7);
+    }
+
+    void addBook()
+    {
+        if (bookCount >= 100)
+        {
+            cout << "\nLibrary storage is full!\n";
+            return;
+        }
+
+        cout << "\n===== ADD BOOK =====\n";
+
+        cout << "Enter Book ID: ";
+        cin >> books[bookCount].bookID;
+        cin.ignore();
+
+        cout << "Enter Book Title: ";
+        getline(cin, books[bookCount].title);
+
+        cout << "Enter Author Name: ";
+        getline(cin, books[bookCount].author);
+
+        bookCount++;
+
+        cout << "\nBook added successfully!\n";
+    }
+
+    void viewBooks()
+    {
+        if (bookCount == 0)
+        {
+            cout << "\nNo books available.\n";
+            return;
+        }
+
+        cout << "\n===== BOOK LIST =====\n";
+
+        for (int i = 0; i < bookCount; i++)
+        {
+            cout << "\nBook #" << i + 1 << endl;
+            cout << "ID     : " << books[i].bookID << endl;
+            cout << "Title  : " << books[i].title << endl;
+            cout << "Author : " << books[i].author << endl;
+        }
     }
 };
 
