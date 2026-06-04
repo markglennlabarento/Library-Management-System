@@ -68,7 +68,7 @@ public:
                 break;
 
             case 3:
-                cout << "\n[Search Book Selected]\n";
+                searchBook();
                 break;
 
             case 4:
@@ -144,6 +144,32 @@ public:
             cout << "Author : " << books[i].author << endl;
         }
     }
+
+	void searchBook()
+	{
+		int searchID;
+		cout << "\nSearch Book ID: ";
+		cin >> searchID;
+
+		bool found = false;
+		for (int i = 0; i < bookCount; i++)
+		{
+			if (books[i].bookID == searchID)
+			{
+				cout << "\nBook Found!\n";
+				cout << "ID     : " << books[i].bookID << endl;
+				cout << "Title  : " << books[i].title << endl;
+				cout << "Author : " << books[i].author << endl;
+				found = true;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			cout << "\nBook Not Found!\n";
+		}
+	}
 };
 
 int main()
